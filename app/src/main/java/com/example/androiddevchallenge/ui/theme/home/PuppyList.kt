@@ -44,7 +44,7 @@ private fun PuppyGridItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(4.dp, 4.dp ))
             .clickable {
                 navigateToPuppyDetails.invoke(puppy)
             }
@@ -52,8 +52,9 @@ private fun PuppyGridItem(
         val image: Painter = painterResource(id = puppy.image)
         Image(
             modifier = Modifier
-                .size(80.dp, 80.dp)
-                .clip(RoundedCornerShape(16.dp)),
+                .fillMaxWidth()
+                .height(150.dp)
+                .clip(RoundedCornerShape(4.dp, 4.dp )),
             painter = image,
             alignment = Alignment.CenterStart,
             contentDescription = "",
