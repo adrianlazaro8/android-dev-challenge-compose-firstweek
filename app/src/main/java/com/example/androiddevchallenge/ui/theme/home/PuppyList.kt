@@ -2,7 +2,6 @@ package com.example.androiddevchallenge.ui.theme.home
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -29,52 +28,8 @@ fun PuppyList(
         Column(
         ) {
             puppies.forEach { puppy ->
-                PuppyGridItem(puppy = puppy, navigateToPuppyDetails)
+                PuppyListItem(puppy = puppy, navigateToPuppyDetails)
             }
-        }
-    }
-}
-
-@Composable
-private fun PuppyGridItem(
-    puppy: Dog,
-    navigateToPuppyDetails: (Dog) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(5.dp)
-            .clip(RoundedCornerShape(4.dp, 4.dp ))
-            .clickable {
-                navigateToPuppyDetails.invoke(puppy)
-            }
-    ) {
-        val image: Painter = painterResource(id = puppy.image)
-        Image(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp)
-                .clip(RoundedCornerShape(4.dp, 4.dp )),
-            painter = image,
-            alignment = Alignment.CenterStart,
-            contentDescription = "",
-            contentScale = ContentScale.Crop
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.LightGray)
-                .padding(vertical = 10.dp, horizontal = 10.dp),
-            verticalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Text(
-                text = puppy.name,
-                style = MaterialTheme.typography.subtitle2
-            )
-            Text(
-                text = "${puppy.age}, ${puppy.color}",
-                style = MaterialTheme.typography.caption
-            )
         }
     }
 }
