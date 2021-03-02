@@ -43,7 +43,7 @@ private fun AppBar() {
                         LocalContentAlpha provides ContentAlpha.high,
                         content = {
                             Text(
-                                text = "PuppyCo"
+                                text = "PuppiesApp"
                             )
                         }
                     )

@@ -4,12 +4,9 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,7 +15,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.entities.Dog
 
 @Composable
@@ -30,7 +26,7 @@ fun PuppyList(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
     ) {
-        LazyColumn(
+        Column(
         ) {
             puppies.forEach { puppy ->
                 PuppyGridItem(puppy = puppy, navigateToPuppyDetails)
@@ -74,12 +70,10 @@ private fun PuppyGridItem(
                 text = puppy.name,
                 style = MaterialTheme.typography.subtitle2
             )
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text(
-                    text = "${puppy.age}, ${puppy.color}",
-                    style = MaterialTheme.typography.caption
-                )
-            }
+            Text(
+                text = "${puppy.age}, ${puppy.color}",
+                style = MaterialTheme.typography.caption
+            )
         }
     }
 }
