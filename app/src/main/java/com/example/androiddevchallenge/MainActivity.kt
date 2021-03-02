@@ -55,7 +55,7 @@ fun MyApp() {
             )
         }
         composable(Navigation.Detail.title + "/{id}") { backStackEntry ->
-            val puppyId = backStackEntry.arguments?.getInt("id")
+            val puppyId = backStackEntry.arguments?.getString("id")?.toInt()
             val puppy = puppies.find { it.id == puppyId }
                 ?: throw IllegalStateException("puppy not found")
             Detail(

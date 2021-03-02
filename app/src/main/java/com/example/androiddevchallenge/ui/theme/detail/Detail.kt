@@ -70,8 +70,9 @@ private fun Header(
     val image: Painter = painterResource(id = puppy.image)
     Image(
         modifier = Modifier
-            .size(80.dp, 80.dp)
-            .clip(RoundedCornerShape(16.dp)),
+            .fillMaxWidth()
+            .height(300.dp)
+            .clip(RoundedCornerShape(0.dp, 0.dp, 16.dp, 16.dp)),
         painter = image,
         alignment = Alignment.CenterStart,
         contentDescription = "Dog",
@@ -84,11 +85,6 @@ private fun Info(puppy: Dog) {
     Column(
         modifier = Modifier.padding(10.dp)
     ) {
-        Text(
-            text = "Puppy",
-            style = MaterialTheme.typography.caption
-        )
-
         Text(
             text = puppy.name,
             style = MaterialTheme.typography.h4
