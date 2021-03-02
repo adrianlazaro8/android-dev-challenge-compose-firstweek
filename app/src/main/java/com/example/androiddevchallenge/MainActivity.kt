@@ -23,7 +23,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.data.DogDataSource
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.theme.home.Home
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +45,26 @@ class MainActivity : AppCompatActivity() {
 // Start building your app here!
 @Composable
 fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+    val puppies = DogDataSource().getDogs()
+    val navController = rememberNavController()
+    NavHost(navController, startDestination = Navigation.Home.title) {
+        composable(Navigation.Home.title) {
+            Home(
+                puppies = puppies,
+                navigateToPuppyDetails = { puppy ->
+                    navController.navigate(Navigation.Detail.title + "/${puppy.id}")
+                }
+            )
+        }
+        composable(Navigation.Detail.title + "/{id}") { backStackEntry ->
+            val puppyId = backStackEntry.arguments?.getInt("id")
+            val puppy = puppies.find { it.id == puppyId }
+                ?: throw IllegalStateException("puppy not found")
+            Detail(
+                puppy = puppy,
+                navigateBack = { navController.popBackStack() }
+            )
+        }
     }
 }
 
