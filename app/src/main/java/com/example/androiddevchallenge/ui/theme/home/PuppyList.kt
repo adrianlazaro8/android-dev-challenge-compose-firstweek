@@ -2,6 +2,8 @@ package com.example.androiddevchallenge.ui.theme.home
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -21,15 +23,16 @@ fun PuppyList(
     puppies: List<Dog>,
     navigateToPuppyDetails: (Dog) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-    ) {
-        Column(
-        ) {
-            puppies.forEach { puppy ->
-                PuppyListItem(puppy = puppy, navigateToPuppyDetails)
+    val scrollState = rememberLazyListState()
+
+        LazyColumn(
+            state = scrollState) {
+            items(puppies.size) {
+                puppies.forEach { puppy ->
+                    PuppyListItem(puppy = puppy, navigateToPuppyDetails)
+                }
             }
+
         }
-    }
+
 }
